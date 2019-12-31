@@ -1,0 +1,40 @@
+<div class="bg-primary text-white p-2" [class.bg-warning]="editing">
+    <h5>{{editing ? "Edit" : "Create"}} Product</h5>
+    <!-- This worked up to page 620 of the Pro angular 6 book.
+    Last event: {{stateEvents | async | formatState}}
+    -->
+</div>
+<div *ngIf="editing" class="p-2">
+    <button class="btn btn-secondary mr-2" [routerLink]="['/form', 'edit', model.getPreviousProductId(product.id)]">
+        Previous
+    </button>
+    <button class="btn btn-secondary" [routerLink]="['/form', 'edit', model.getNextProductId(product.id)]">
+        Next
+    </button>
+</div>
+<!--This was changed on page 696
+<form novalidate #form="ngForm" (ngSubmit)="submitForm(form)" (reset)="resetForm()">-->
+<form novalidate #form="ngForm" (ngSubmit)="submitForm(form)">
+    <div class="form-group">
+        <label>Id of the product, not necessarily its index.</label>
+        <input class="form-control" name="id" [(ngModel)]="product.id" required disabled />
+    </div>
+    <div class="form-group">
+        <label>Name</label>
+        <input class="form-control" name="name" [(ngModel)]="product.name" required #myFocusElement />
+    </div>
+    <div class="form-group">
+        <label>Category</label>
+        <input class="form-control" name="category" [(ngModel)]="product.category" required />
+    </div>
+    <div class="form-group">
+        <label>Price</label>
+        <input class="form-control" name="price" [(ngModel)]="product.price" required pattern="^[0-9]+[0-9\.]*$" />
+    </div>
+    <button type="submit" class="btn btn-primary m-1" [class.btn-warning]="editing" [disabled]="form.invalid">
+        {{editing ? "Save" : "Create"}}
+    </button>
+    <!--This was changed on page 696
+    <button type="reset" class="btn btn-secondary m-1" routerLink="/">Cancel</button>-->
+    <button type="button" class="btn btn-secondary m-1" routerLink="/">Cancel</button>
+</form>
