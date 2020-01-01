@@ -50,6 +50,7 @@
                     <th></th>
                 </tr>
                 <tr *ngFor="let item of getProducts()" [@rowHighlight]="getRowState(item.category)">
+                    <!--[@rowHighlight] is prefixed with an @ because it tells angular that it's supposed to use the animation trigger rowHighlight in the HighlightTrigger class, used in the component of this page.-->
                     <td style="vertical-align:middle">{{item.id}}</td>
                     <td style="vertical-align:middle">{{item.name}}</td>
                     <td style="vertical-align:middle">{{item.category}}</td>
